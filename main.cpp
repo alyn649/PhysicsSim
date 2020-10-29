@@ -3,17 +3,23 @@
 #include "Vector.h"
 
 int main() {
-  Particle x;
+  Vector pos;
+  Vector vel(0, 100/3.6);
+  Vector acc(0, -9.81);
 
-  Vector a(15, 12, 2);
-  Vector b(5, 1);
+  Particle ball(pos, vel, acc);
 
-  a.print();
-  b.print();
+  int ticks = 10;
 
-  a.cross(&b);
+  for(int i = 0; i < ticks; i++) {
+    cout << " Tick " << i << ": " << endl;
+    ball.getPosition().print();
+    ball.getVelocity().print();
+    ball.getAcceleration().print();
 
-  a.print();
+    ball.update();
+
+  }
 
   return 0;
 }

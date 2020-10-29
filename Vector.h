@@ -1,3 +1,6 @@
+#ifndef _Vector_H_
+#define _Vector_H_
+
 using namespace std;
 
 class Vector {
@@ -17,17 +20,27 @@ class Vector {
     double getCompy();
     double getCompz();
 
+    // Vector assignment
+    void operator=(Vector &b);
+
+    // Vector comparison
+    bool operator==(Vector &b);
+
     // Vector operations
-    void add(Vector* b);
-    void subtract(Vector* b);
+    void operator+=(Vector &b);
+    void operator-=(Vector &b);
     void product(double b);
     void divide(double b);
     
-    double dot(Vector* b);
-    void cross(Vector* b);
+    double dot(Vector &b);
+    void cross(Vector &b);
+
+    static Vector cross(Vector &a, Vector &b);
 
     // Print vector
     void print();
 
 
 };
+
+#endif

@@ -31,15 +31,15 @@ double Vector::getCompz() {
 }
 
 // Vector operations
-void Vector::add(Vector* b) {
-  this->x += b->getCompx();
-  this->y += b->getCompy();
-  this->z += b->getCompz();
+void Vector::operator+=(Vector &b) {
+  this->x += b.getCompx();
+  this->y += b.getCompy();
+  this->z += b.getCompz();
 }
-void Vector::subtract(Vector* b) {
-  this->x -= b->getCompx();
-  this->y -= b->getCompy();
-  this->z -= b->getCompz();
+void Vector::operator-=(Vector &b) {
+  this->x -= b.getCompx();
+  this->y -= b.getCompy();
+  this->z -= b.getCompz();
 }
 void Vector::product(double b) {
   this->x *= b;
@@ -51,17 +51,24 @@ void Vector::divide(double b) {
   this->y /= b;
   this->z /= b;
 }
-double Vector::dot(Vector* b) {
-  return (this->x * b->getCompx()) + (this->y * b->getCompy()) + (this->z * b->getCompz());
+double Vector::dot(Vector &b) {
+  return (this->x * b.getCompx()) + (this->y * b.getCompy()) + (this->z * b.getCompz());
 }
-void Vector::cross(Vector* b) {
-  double buffx = this->y * b->getCompz() - this->z * b->getCompy();
-  double buffy = (this->x * b->getCompz() - this->z * b->getCompx()) * (-1);
-  double buffz = this->x * b->getCompy() - this->y * b->getCompx();
+void Vector::cross(Vector &b) {
+  double buffx = this->y * b.getCompz() - this->z * b.getCompy();
+  double buffy = (this->x * b.getCompz() - this->z * b.getCompx()) * (-1);
+  double buffz = this->x * b.getCompy() - this->y * b.getCompx();
 
   this->x = buffx;
   this->y = buffy;
   this->z = buffz;
+}
+
+// Set this vector to another
+void Vector::operator=(Vector &b) {
+  this->x = b.getCompx();
+  this->y = b.getCompy();
+  this->z = b.getCompz();
 }
 
 // Print all components
