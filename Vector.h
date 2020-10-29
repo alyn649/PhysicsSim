@@ -16,9 +16,9 @@ class Vector {
     Vector(double x, double y, double z);
 
     // Getters for each component
-    double getCompx();
-    double getCompy();
-    double getCompz();
+    const double getCompx();
+    const double getCompy();
+    const double getCompz();
 
     // Vector assignment
     void operator=(Vector &b);
@@ -26,14 +26,18 @@ class Vector {
     // Vector comparison
     bool operator==(Vector &b);
 
-    // Vector operations
+    // Vector operations to return
+    Vector operator+(Vector b);
+    Vector operator-(Vector b);
+    Vector operator*(double b);
+
+    // Vector operations to this vector
     void operator+=(Vector &b);
     void operator-=(Vector &b);
-    void product(double b);
-    void divide(double b);
+    void operator*=(double b);
     
     double dot(Vector &b);
-    void cross(Vector &b);
+    Vector cross(Vector &b);
 
     static Vector cross(Vector &a, Vector &b);
 

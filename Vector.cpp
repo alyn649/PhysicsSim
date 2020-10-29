@@ -1,18 +1,21 @@
 #include "Vector.h"
 #include <iostream>
 
+// Construct empty
 Vector::Vector() {
   this->x = 0;
   this->y = 0;
   this->z = 0;
 }
 
+// Construct with 2d input
 Vector::Vector(double x, double y) {
   this->x = x;
   this->y = y;
   this->z = 0;
 }
 
+// Construct with 3d input
 Vector::Vector(double x, double y, double z) {
   this->x = x;
   this->y = y;
@@ -20,48 +23,66 @@ Vector::Vector(double x, double y, double z) {
 }
 
 // Getters for each component
-double Vector::getCompx() {
+const double Vector::getCompx() {
   return this->x;
 }
-double Vector::getCompy() {
+const double Vector::getCompy() {
   return this->y;
 }
-double Vector::getCompz() {
+const double Vector::getCompz() {
   return this->z;
 }
 
-// Vector operations
+// Vector operations on this vector
+// Add a vector
 void Vector::operator+=(Vector &b) {
   this->x += b.getCompx();
   this->y += b.getCompy();
   this->z += b.getCompz();
 }
+// Subtract a vector
 void Vector::operator-=(Vector &b) {
   this->x -= b.getCompx();
   this->y -= b.getCompy();
   this->z -= b.getCompz();
 }
-void Vector::product(double b) {
+// Times a scalar
+void Vector::operator*=(double b) {
   this->x *= b;
   this->y *= b;
   this->z *= b;
 }
-void Vector::divide(double b) {
-  this->x /= b;
-  this->y /= b;
-  this->z /= b;
+
+// Vector operations to return
+// Add a vector
+Vector Vector::operator+(Vector b) {
+  Vector out(this->x + b.getCompx(), this->y + b.getCompy(), this->z + b.getCompz());
+  return out;
 }
+// Subtract a vector
+Vector Vector::operator-(Vector b) {
+  Vector out(this->x - b.getCompx(), this->y - b.getCompy(), this->z - b.getCompz());
+  return out;
+}
+// Times a scalar
+Vector Vector::operator*(double b) {
+  Vector out(this->x * b, this->y * b, this->z * b);
+  return out;
+}
+
+// Return the dot product of this and another vector
 double Vector::dot(Vector &b) {
   return (this->x * b.getCompx()) + (this->y * b.getCompy()) + (this->z * b.getCompz());
 }
-void Vector::cross(Vector &b) {
+
+// Return the cross product of this and another vector
+Vector Vector::cross(Vector &b) {
   double buffx = this->y * b.getCompz() - this->z * b.getCompy();
   double buffy = (this->x * b.getCompz() - this->z * b.getCompx()) * (-1);
   double buffz = this->x * b.getCompy() - this->y * b.getCompx();
 
-  this->x = buffx;
-  this->y = buffy;
-  this->z = buffz;
+  Vector out(buffx, buffy, buffz);
+  return out;
 }
 
 // Set this vector to another
