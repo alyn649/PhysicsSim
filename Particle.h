@@ -6,7 +6,7 @@
 using namespace std;
 
 class Particle {
-  private:
+  protected:
     // Stores properties of particle
     Vector position;
     Vector velocity;
@@ -23,7 +23,12 @@ class Particle {
     Vector getVelocity();
     Vector getAcceleration();
 
-    void update();
+    // Getters for particle vectors
+    void setPosition(Vector position);
+    void setVelocity(Vector velocity);
+    void setAcceleration(Vector acceleration);
+
+    void update(double time);
 };
 
 #endif

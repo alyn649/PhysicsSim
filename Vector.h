@@ -21,10 +21,13 @@ class Vector {
     const double getCompz();
 
     // Vector assignment
-    void operator=(Vector &b);
+    void operator=(Vector b);
+
+    // Assignment with double array
+    void operator=(double b[3]);
 
     // Vector comparison
-    bool operator==(Vector &b);
+    bool operator==(Vector b);
 
     // Vector operations to return
     Vector operator+(Vector b);
@@ -32,17 +35,21 @@ class Vector {
     Vector operator*(double b);
 
     // Vector operations to this vector
-    void operator+=(Vector &b);
-    void operator-=(Vector &b);
+    void operator+=(Vector b);
+    void operator-=(Vector b);
     void operator*=(double b);
     
-    double dot(Vector &b);
-    Vector cross(Vector &b);
+    // Special Vector operations
+    double dot(Vector b);
+    Vector cross(Vector b);
 
-    static Vector cross(Vector &a, Vector &b);
+    // Vector characteristrics
+    double magnitude();
+    Vector unit();
 
     // Print vector
     void print();
+    void print2d();
 
 
 };

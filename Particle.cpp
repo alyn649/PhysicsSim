@@ -36,8 +36,19 @@ Vector Particle::getAcceleration() {
   return this->acceleration;
 }
 
+// Set properties
+void Particle::setPosition(Vector position) {
+  this->position = position;
+}
+void Particle::setVelocity(Vector velocity) {
+  this->velocity = velocity;
+}
+void Particle::setAcceleration(Vector acceleration) {
+  this->acceleration = acceleration;
+}
+
 // Updates the properties of the particle
-void Particle::update() {
-  this->velocity += this->acceleration;
-  this->position += this->velocity;
+void Particle::update(double time) {
+  this->velocity += this->acceleration*time;
+  this->position += this->velocity*time;
 }
