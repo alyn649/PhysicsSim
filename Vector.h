@@ -4,7 +4,7 @@
 using namespace std;
 
 class Vector {
-  private:
+  protected:
     // Holds 3 component values of the 3d vector
     double x;
     double y;

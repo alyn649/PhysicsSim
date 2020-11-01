@@ -25,6 +25,25 @@ Particle::Particle(Vector position, Vector velocity, Vector acceleration) {
   this->acceleration = acceleration;
 }
 
+// Construct using double arrays instead
+Particle::Particle(double position[3]) {
+  Vector empty = Vector();
+  this->position = position;
+  this->velocity = empty;
+  this->acceleration = empty;
+}
+Particle::Particle(double position[3], double velocity[3]) {
+  Vector empty = Vector();
+  this->position = position;
+  this->velocity = velocity;
+  this->acceleration = empty;
+}
+Particle::Particle(double position[3], double velocity[3], double acceleration[3]) {
+  this->position = position;
+  this->velocity = velocity;
+  this->acceleration = acceleration;
+}
+
 // Getters for particle properties
 Vector Particle::getPosition() {
   return this->position;

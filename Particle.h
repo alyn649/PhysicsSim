@@ -18,6 +18,10 @@ class Particle {
     Particle(Vector position, Vector velocity); // constant vel from starting point
     Particle(Vector position, Vector velocity, Vector acceleration); // all
 
+    Particle(double position[3]);
+    Particle(double position[3], double velocity[3]);
+    Particle(double position[3], double velocity[3], double acceleration[3]);
+
     // Getters for particle vectors
     Vector getPosition();
     Vector getVelocity();

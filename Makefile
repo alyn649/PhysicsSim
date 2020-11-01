@@ -1,6 +1,6 @@
 CXX = g++ 
 
-SRCS = main.cpp Particle.cpp Vector.cpp MassParticle.cpp
+SRCS = main.cpp Particle.cpp Vector.cpp MassParticle.cpp Force.cpp
 
 TARGET = app.exe
 

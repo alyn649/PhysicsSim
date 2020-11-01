@@ -2,92 +2,56 @@
 #include "Particle.h"
 #include "Vector.h"
 #include "MassParticle.h"
+#include "Force.h"
+#include <fstream>
+#include <math.h>
 
 int main() {
+  Force* g = new Force({0, -9.81, 0});
 
-  /*
-  // Test some rigid body math
-  Vector omega(0, 0, 4); // 15 rad/s
-  Vector r_ba(7, 4); // 50m radius
-  Vector v_a(10, 1); // Some origin velocity
+  MassParticle ball(12.5);
+  
+  Vector vel(8, 25);
+  ball.setVelocity(vel);
 
-  // Calculate 
-  Vector v_b = v_a + omega.cross(r_ba);
-
-  v_b.print();
-
-  */
-
-  // Initial velocity vertically
-  Vector pos;
-  Vector vel(0, 100/3.6);
-  Vector acc(0, -9.81);
-
-  Particle ball(pos, vel, acc);
-
-  /*
-  for(int i = 0; i < 5; i++) {
-    cout << " Tick " << i << ": " << endl;
-    ball.getPosition().print();
-    ball.getVelocity().print();
-    ball.getAcceleration().print();
-
-    ball.update();
-  }
-  */
-
-  // Use double assingment
-  pos = {0, 1, 0};
-  vel = {5, 0, 0};
-  acc = {0, 0, 0};
-
-  Particle swingBall(pos, vel, acc);
-
-  // Circular motion by manually changing acceleration
-  for(int i = 0; i < 0; i++) {
-    acc = swingBall.getPosition()*(-1);
-    swingBall.setAcceleration(acc);
-
-    swingBall.getPosition().print2d();
-
-    swingBall.update(0.1);
-  }
-
-  Vector planet(10, 5);
-
-  pos = {0, 0, 0};
-  vel = {-4, 0, 0};
-  acc = {0, 0, 0};
-
-  Particle rocket(pos, vel, acc);
-
-  Vector r_pr;
-
-  for(int i = 0; i < 50; i++) {
-    r_pr = (planet - rocket.getPosition());
-    acc = r_pr.unit() * (20/r_pr.magnitude());
-    rocket.setAcceleration(acc);
-
-    rocket.getPosition().print2d();
-
-    rocket.update(0.5);
-  }
-
-
-  /*
-
-  // Particle with mass
-  MassParticle massBall(15, ball);
-
-  massBall.getPosition().print();
-  massBall.getVelocity().print();
-  massBall.getAcceleration().print();
-
-  ball.update();
-
-  cout << massBall.getMass() << "kg" << endl;
-
-  */
+  ball.
 
   return 0;
+}
+
+void biPlanetOrbit() {
+  Vector planet(10, 5);
+  Vector planet2(100, 20);
+
+  Particle rocket({0, 0, 0}, {0, 10, 0});
+
+  Vector r_pr;
+  Vector r_p2r;
+
+  int ticks = 2000;
+
+  Vector acc;
+
+  ofstream output;
+  output.open("result.txt");
+
+// Working orbit
+  for(int i = 0; i < ticks; i++) {
+    r_pr = (planet - rocket.getPosition());
+    r_p2r = (planet2 - rocket.getPosition());
+
+    acc = r_pr.unit() * (650 / pow(r_pr.magnitude(), 2));
+    acc += r_p2r.unit() * (650 / pow(r_p2r.magnitude(), 2));
+
+    rocket.setAcceleration(acc);
+
+    if(i%(ticks/1000) == 0) {
+      output << rocket.getPosition().getCompx() << ",";
+      output << rocket.getPosition().getCompy() << endl;
+    }
+
+    rocket.update(0.1);
+  }
+  
+  output.close();
 }
